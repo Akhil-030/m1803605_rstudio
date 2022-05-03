@@ -1,0 +1,106 @@
+---
+title: "Advanced Bioinformatics 2022 assessment"
+author: "m1803605"
+date: '2022-05-01'
+output: html_document
+---
+
+# Task3.1
+```{r}
+sum(5:55) 
+```
+# Task3.2
+```{r}
+sumfun <- function(n) {sum(5:n)} 
+```
+```{r}
+sumfun(10)
+```
+```{r}
+sumfun(20)
+```
+```{r}
+sumfun(100)
+```
+# Task3.3
+```{r}
+prev <- 1 
+current <- 1 
+for (n in c(1:12)) {
+  # print "1" for first two values
+  if (n < 3) {
+    print(1)
+  } else {
+    # save value of current 
+    temp <- current
+    
+    # calculate new value of current 
+    current <- prev + current
+    print(current)
+    
+    # update prev to old value of current  
+    prev <- temp
+    
+  }
+} 
+```
+# Task 3.4
+```{r}
+library(ggplot2)
+
+#Use ggplot to create a filled box plot using the mtcars data set, for miles per gallon as a function of the number of gears
+ggplot(data=mtcars,aes(x= as.factor(gear), y= mpg, fill= as.factor(gear))) + geom_boxplot() + ggtitle("Box plot showing the miles per gallon (mpg) as a function of the number of gears")
+```
+
+
+
+
+
+# Task 3.5
+```{r}
+#Assign dist and speed from the cars data set to different variables
+y <- cars $dist; x <- cars $speed; model <- lm(formula = "y ~ x") #Assign the lm of the above variables to a new variable 
+model 
+summary(model) #To see summary statistics
+
+```
+#### Fitted slope = 3.9324 
+#### Fitted slope standard error = 0.4155        
+####  Intercept = -17.579
+#### Intercept standard error = 6.7584 
+#### Unit for speed = miles per hour
+#### Unit for distance = feet
+
+# Task 3.6
+```{r}
+library(ggplot2)
+#Use ggplot to create linear model for the lm in Task 3.5
+ggplot(data = cars, aes(x= speed, y=dist)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x") +xlab("speed(mph)")+ ylab("dist(feet)") + ggtitle("Linear model showing relationship between breaking distance (dist) and speed")
+```
+
+
+
+
+# Task 3.7
+```{r}
+# convert dist to miles; 1 mile is equal to 5280 feet
+dist_miles <- cars$dist/5280
+speed_squared <- cars$speed^2 #since breaking distance is proportional to speed squared
+lm(formula = "dist_miles ~ speed_squared") 
+```
+```{r}
+
+```
+
+```{r}
+library(ggplot2)
+ggplot(data = cars, aes(x= speed_squared, y= dist_miles)) + geom_point() + geom_smooth(method = "lm", formula = "dist_miles ~ speed_squared") + ggtitle(" Linear regression of breaking distance and speed squared")
+```
+
+
+
+
+
+
+
+
